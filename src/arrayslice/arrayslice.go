@@ -148,3 +148,18 @@ func soo()  {
 	s16 := [] rune(str16)
 	fmt.Println(string(s16[0:len(s16)-1]))
 }
+
+func zoo(){
+
+	v1 := [] int{1,2,3,4,5}
+	fmt.Printf("v1 type is %T\n",v1)
+
+	v2 := v1[0:2]
+	fmt.Printf("v2 type is %T\n",v2)
+
+	v3 := make([] int,0)
+	v3 = append(v3, 1)
+	v3 = append(v3, 2)
+	fmt.Printf("v3 type is %T\n",v3)
+
+}

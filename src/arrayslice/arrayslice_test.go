@@ -17,3 +17,7 @@ func Test_callSumArray(t *testing.T){
 func Test_soo(t *testing.T)  {
 	soo()
 }
+
+func Test_zoo(t *testing.T) {
+	zoo()
+}

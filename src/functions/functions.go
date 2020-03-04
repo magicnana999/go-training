@@ -52,8 +52,40 @@ func foo3() {
 	参数指针Struct()
 	参数指针map()
 	参数指针Array()
+	参数指针Slice()
 	//传递slice到新的局部作用于导致扩容不会影响原值()
 
+}
+
+func 参数指针Slice(){
+	println()
+	i := []int{100}
+	fmt.Printf("%p %p %v len(i)=%v cap(i)=%v\n",&i,i,i,len(i),cap(i))
+	参数指针Slice1(i)
+	参数指针Slice2(&i)
+	参数指针Slice3(i)
+	参数指针Slice4(&i)
+	fmt.Printf("%p %p %v len(i)=%v cap(i)=%v\n",&i,i,i,len(i),cap(i))
+}
+
+func 参数指针Slice1(i []int){
+	i[0] +=1
+	fmt.Printf("%p %p %v len(i)=%v cap(i)=%v\n",&i,i,i,len(i),cap(i))
+}
+
+func 参数指针Slice2(i *[]int){
+	(*i)[0] +=1
+	fmt.Printf("%p %p %v len(i)=%v cap(i)=%v\n",&i,i,i,len(*i),cap(*i))
+}
+
+func 参数指针Slice3(i []int){
+	i = append(i, 100,200)
+	fmt.Printf("%p %p %v len(i)=%v cap(i)=%v\n",&i,i,i,len(i),cap(i))
+}
+
+func 参数指针Slice4(i *[]int){
+	*i = append(*i, 300,400,500,600)
+	fmt.Printf("%p %p %v len(i)=%v cap(i)=%v\n",&i,i,i,len(*i),cap(*i))
 }
 
 func 参数指针Array(){

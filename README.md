@@ -32,6 +32,10 @@ docker run -p 8080:8080 -d jinsong/go-training:1.0.7
 ```
 
 
-
+# 题3
+* 详见go-training.yaml
+* 这里是NodePort方式
+* 手动扩容
+* ```kubectl scale deployment go-training --replicas=10```
 
 

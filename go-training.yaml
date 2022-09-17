@@ -1,0 +1,111 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: go-training
+  labels:
+    app: go-training
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: go-training
+  template:
+    metadata:
+      labels:
+        app: go-training
+    spec:
+#       hostAliases:
+#       - hostnames:
+#         - "s5"
+#         ip: "172.17.62.202"
+#       imagePullSecrets:
+#       - name: liuyi-regsitry-outer
+      containers:
+      - name: go-training
+        image: jinsong/go-training:1.0.7
+        imagePullPolicy: Always
+#         readinessProbe:
+#           httpGet:
+#             path: /actuator/health
+#             port: 37710
+#           initialDelaySeconds: 5
+#           timeoutSeconds: 1
+        ports:
+        - containerPort: 8080
+          hostPort: 8080
+
+#         volumeMounts:
+#         - name: logs-mount
+#           mountPath: /var/log/liuyi/go-training
+#         - name: application-mysql
+#           mountPath: /config/application-mysql.yaml
+#           subPath: path/to/application-mysql.yaml
+#         - name: application-redis
+#           mountPath: /config/application-redis.yaml
+#           subPath: path/to/application-redis.yaml
+#         - name: application-k8s
+#           mountPath: /config/application-k8s.yaml
+#           subPath: path/to/application-k8s.yaml
+
+
+#       volumes:
+#       - name: logs-mount
+#         nfs:
+#           path: /app/log/
+#           server: 172.17.62.202
+#       - name: application-mysql
+#         configMap:
+#           name: liuyi-config
+#           defaultMode: 0777
+#           items:
+#           - key: application-mysql.yaml
+#             path: path/to/application-mysql.yaml
+#       - name: application-redis
+#         configMap:
+#           name: liuyi-config
+#           defaultMode: 0777
+#           items:
+#           - key: application-redis.yaml
+#             path: path/to/application-redis.yaml
+#       - name: application-k8s
+#         configMap:
+#           name: liuyi-config
+#           defaultMode: 0777
+#           items:
+#           - key: application-k8s.yaml
+#             path: path/to/application-k8s.yaml
+
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: go-training
+  labels:
+    app: go-training
+spec:
+  type: NodePort
+  ports:
+  - port: 8080
+    targetPort: 8080
+    protocol: TCP
+  selector:
+    app: go-training
+
+# ---
+# apiVersion: extensions/v1beta1
+# kind: Ingress
+# metadata:
+#   name: go-training
+#   namespace: default
+#   annotations:
+#     kubernetes.io/ingress.class: "nginx"
+# spec:
+#   rules:
+#   - host: s5
+#     http:
+#       paths:
+#       - path: /liuyi/rest710
+#         backend:
+#           serviceName: go-training
+#           servicePort: 37710

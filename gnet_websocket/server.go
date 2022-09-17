@@ -95,7 +95,7 @@ func Start() {
 	op1 := gnet.WithMulticore(true)
 	op2 := gnet.WithNumEventLoop(50)
 
-	if err := gnet.Run(server, "tcp://:8080", op1, op2); err != nil {
+	if err := gnet.Run(server, "tcp://0.0.0.0:8080", op1, op2); err != nil {
 		logger.Logger.Errorf("gnet_websocket start [err=%v]", err.Error())
 	}
 }

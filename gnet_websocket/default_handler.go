@@ -8,7 +8,7 @@ type DefaultHandler struct {
 func (d DefaultHandler) OnText(s *Session, text string) {
 	logger.Logger.Debugf("OnText conn[%v] message[%v]", s.Remote, text)
 
-	s.SendTextAsync("hello "+text)
+	s.SendTextAsync(ServerVersion+" hello "+text)
 
 }
 
